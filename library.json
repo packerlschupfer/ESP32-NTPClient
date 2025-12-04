@@ -1,0 +1,41 @@
+{
+  "name": "ESP32-NTPClient",
+  "version": "0.1.0",
+  "description": "Advanced NTP client for ESP32 with multi-server support, automatic DST, RTC sync, and retry strategies",
+  "keywords": [
+    "ntp",
+    "time",
+    "sync",
+    "network",
+    "esp32",
+    "rtc",
+    "dst",
+    "timezone"
+  ],
+  "authors": [
+    {
+      "name": "packerlschupfer",
+      "email": "packerlschupfer@noreply.github.com",
+      "maintainer": true
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/packerlschupfer/ESP32-NTPClient.git"
+  },
+  "homepage": "https://github.com/packerlschupfer/ESP32-NTPClient",
+  "license": "GPL-3",
+  "frameworks": [
+    "arduino",
+    "espidf"
+  ],
+  "platforms": [
+    "espressif32"
+  ],
+  "dependencies": {},
+  "export": {
+    "include": [
+      "src/*"
+    ]
+  }
+}
