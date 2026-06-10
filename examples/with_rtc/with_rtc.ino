@@ -271,8 +271,8 @@ void handleSerialCommands() {
         
         case 'e': {
             // Reconnect Ethernet
+            // Note: the Arduino Ethernet library has no end(); just re-init.
             Serial.println("\nReconnecting Ethernet...");
-            Ethernet.end();
             delay(1000);
             connectEthernet();
             break;

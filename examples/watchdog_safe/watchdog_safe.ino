@@ -19,8 +19,8 @@
 const char* ssid = "your-ssid";
 const char* password = "your-password";
 
-// Watchdog timeout (seconds)
-#define WDT_TIMEOUT 10
+// Watchdog timeout (milliseconds for the Arduino-ESP32 3.x / IDF 5.x API)
+#define WDT_TIMEOUT_MS 10000
 
 // Create NTP client instance
 NTPClient NTP;
@@ -43,8 +43,13 @@ void setup() {
     
     Serial.println("\n=== NTPClient Watchdog-Safe Example ===");
     
-    // Initialize watchdog
-    esp_task_wdt_init(WDT_TIMEOUT, true);  // Enable panic so ESP32 restarts
+    // Initialize watchdog (Arduino-ESP32 3.x / IDF 5.x config-struct API)
+    esp_task_wdt_config_t wdtConfig = {
+        .timeout_ms = WDT_TIMEOUT_MS,
+        .idle_core_mask = 0,
+        .trigger_panic = true,  // Restart ESP32 if the watchdog fires
+    };
+    esp_task_wdt_init(&wdtConfig);
     esp_task_wdt_add(NULL);  // Add current thread to WDT watch
     
     // Connect to WiFi

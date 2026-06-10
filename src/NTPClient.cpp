@@ -1,5 +1,6 @@
 #include "NTPClient.h"
 #include <sys/time.h>
+#include <lwip/def.h>  // htonl/ntohl byte-order helpers
 
 // Default NTP servers
 const char* NTPClient::DEFAULT_NTP_SERVERS[] = {
