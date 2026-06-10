@@ -31,8 +31,8 @@
 #define ETH_PHY_MDIO        18  // Pin# of the I²C-like MDIO signal
 #define ETH_CLK_MODE        ETH_CLOCK_GPIO17_OUT
 
-// Use global NTP instance
-extern NTPClient NTP;
+// Create NTP client instance
+NTPClient NTP;
 
 // Ethernet event handler
 void WiFiEvent(WiFiEvent_t event) {
@@ -89,12 +89,12 @@ void setup() {
     
     if (result.success) {
         Serial.println("Time synchronized successfully!");
-        Serial.printf("Server: %s\n", result.serverUsed.c_str());
+        Serial.printf("Server: %s\n", result.serverUsed);
         Serial.printf("Offset: %ldms\n", result.offsetMs);
         Serial.printf("Round trip: %dms\n", result.roundTripMs);
         Serial.printf("Server stratum: %d\n", result.stratum);
     } else {
-        Serial.printf("Failed to sync time: %s\n", result.error.c_str());
+        Serial.printf("Failed to sync time: %s\n", result.error);
     }
     
     // Enable auto-sync every 30 minutes

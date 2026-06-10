@@ -22,8 +22,8 @@ const char* password = "your-password";
 // Watchdog timeout (seconds)
 #define WDT_TIMEOUT 10
 
-// Use global NTP instance
-extern NTPClient NTP;
+// Create NTP client instance
+NTPClient NTP;
 
 // Watchdog-safe yield function
 void feedWatchdog() {
@@ -77,11 +77,11 @@ void setup() {
     
     if (result.success) {
         Serial.println("Time synchronized successfully!");
-        Serial.printf("Server: %s\n", result.serverUsed.c_str());
+        Serial.printf("Server: %s\n", result.serverUsed);
         Serial.printf("Offset: %ldms\n", result.offsetMs);
         Serial.printf("Round trip: %dms\n", result.roundTripMs);
     } else {
-        Serial.printf("Failed to sync time: %s\n", result.error.c_str());
+        Serial.printf("Failed to sync time: %s\n", result.error);
     }
     
     // Enable auto-sync

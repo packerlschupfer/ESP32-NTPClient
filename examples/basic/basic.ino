@@ -82,12 +82,12 @@ void setup() {
     
     if (result.success) {
         Serial.println("Time synchronized successfully!");
-        Serial.printf("Server: %s\n", result.serverUsed.c_str());
+        Serial.printf("Server: %s\n", result.serverUsed);
         Serial.printf("Offset: %ldms\n", result.offsetMs);
         Serial.printf("Round trip: %dms\n", result.roundTripMs);
         Serial.printf("Server stratum: %d\n", result.stratum);
     } else {
-        Serial.printf("Failed to sync time: %s\n", result.error.c_str());
+        Serial.printf("Failed to sync time: %s\n", result.error);
     }
     
     // Enable auto-sync every 30 minutes
