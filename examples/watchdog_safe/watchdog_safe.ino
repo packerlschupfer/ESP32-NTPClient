@@ -43,13 +43,18 @@ void setup() {
     
     Serial.println("\n=== NTPClient Watchdog-Safe Example ===");
     
-    // Initialize watchdog (Arduino-ESP32 3.x / IDF 5.x config-struct API)
+    // Initialize watchdog. The esp_task_wdt_init() signature changed between
+    // IDF 4.x (Arduino-ESP32 2.x) and IDF 5.x (Arduino-ESP32 3.x).
+#if ESP_IDF_VERSION_MAJOR >= 5
     esp_task_wdt_config_t wdtConfig = {
         .timeout_ms = WDT_TIMEOUT_MS,
         .idle_core_mask = 0,
         .trigger_panic = true,  // Restart ESP32 if the watchdog fires
     };
     esp_task_wdt_init(&wdtConfig);
+#else
+    esp_task_wdt_init(WDT_TIMEOUT_MS / 1000, true);  // seconds, enable panic
+#endif
     esp_task_wdt_add(NULL);  // Add current thread to WDT watch
     
     // Connect to WiFi
